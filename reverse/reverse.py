@@ -46,5 +46,24 @@ class LinkedList:
         return False
 
     def reverse_list(self, node, prev):
-        # You must use recursion for this solution
-        pass
+        # base case
+        if node.next_node is None:
+            node = self.head
+            return
+        else:
+            prev = node
+            node = node.next_node
+            self.reverse_list(node, prev)
+
+
+list = LinkedList()
+list.add_to_head(1)
+list.add_to_head(2)
+list.add_to_head(3)
+list.add_to_head(4)
+list.add_to_head(5)
+# should be 5
+print("head:", list.head.value, "should be 5")
+list.reverse_list(list.head, None)
+# should be 1
+print("head:", list.head.value, "should be 1")
