@@ -9,13 +9,13 @@ class RingBuffer:
 
     def append(self, item):
         if self.storage.length == self.capacity:
-            self.storage.add_to_tail(item)
-            # replace oldest with newest
-            self.current = self.storage.tail
-            # set current to next oldest
-            self.current.next = self.current
+            self.current.value = item
+            if self.current == self.storage.tail:
+                self.current = self.storage.head
+            else:
+                self.current = self.current.next
         else:
-
+            self.storage.add_to_tail(item)
             self.current = self.storage.head
 
     def get(self):
@@ -33,22 +33,22 @@ buffer.append("a")
 buffer.append("b")
 buffer.append("c")
 buffer.append("d")
-# print("len", buffer.storage.length)
-# print("tail", buffer.storage.tail.value)
+print("len", buffer.storage.length)
+print("tail", buffer.storage.tail.value)
 print(buffer.get())
 buffer.append("e")
-# print("len", buffer.storage.length)
-# print("tail", buffer.storage.tail.value)
+print("len", buffer.storage.length)
+print("tail", buffer.storage.tail.value)
 print(buffer.get())
 buffer.append("f")
-# print("len", buffer.storage.length)
-# print("tail", buffer.storage.tail.value)
+print("len", buffer.storage.length)
+print("tail", buffer.storage.tail.value)
 print(buffer.get())
 buffer.append("g")
 buffer.append("h")
 buffer.append("i")
 # print("len", buffer.storage.length)
-# print("tail", buffer.storage.tail.value)
+print("tail", buffer.storage.tail.value)
 print(buffer.get())
 # ["f", "g", "h", "i", "e"]
 
