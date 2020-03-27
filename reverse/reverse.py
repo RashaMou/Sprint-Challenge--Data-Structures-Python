@@ -46,5 +46,38 @@ class LinkedList:
         return False
 
     def reverse_list(self, node, prev):
-        # You must use recursion for this solution
-        pass
+        # base case. Once we reach the end, make that node the head
+        if node is None:
+            return node
+        if node.next_node is None:
+            self.head = node
+            self.head.next_node = prev
+            return
+        else:
+            self.reverse_list(node.next_node, node)
+            node.next_node = prev
+            return
+
+
+"""
+       1     <-     2    ->    3    ->   4
+prev   node        next        
+       prev        node =current
+"""
+
+# You need an if statement for when the node is none. You need to set the node's next_node to be prev
+# in your second if statement. You're over complicating the else. You should just be able to pass
+# in the the node's next node and the node to the params of your recursive function, and then just
+# set the next node to the be the prev like you'll have to do for the second if statement.
+
+list = LinkedList()
+list.add_to_head(1)
+list.add_to_head(2)
+list.add_to_head(3)
+list.add_to_head(4)
+list.add_to_head(5)
+# should be 5
+print("head:", list.head.value, "should be 5")
+list.reverse_list(list.head, None)
+# should be 1
+print("head:", list.head.value, "should be 1")
